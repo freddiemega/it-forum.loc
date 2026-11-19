@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ title }}</title>
 	<link rel="stylesheet" href="styles.css">
+	<script src="../js/script.js" defer></script>
 </head>
 <body>
 	<header class="head">
@@ -21,12 +22,19 @@
 				<button class="btn" type="submit">Search</button>
 			</form>
 			<div class="who">
-				<a href="profile.html">Ira Bell</a>
-				<a href="login.html">Log out</a>
+				<?php include 'header.php'; ?>
+				<!--<a href="profile.html">Ira Bell</a>
+				<a href="login.html">Log out</a>-->
 			</div>
 		</div>
 	</header>
 	<main class="wrap">
+		<?php if (!empty($_SESSION['flash'])): ?>
+			<div class="flash-message">
+				<?= htmlspecialchars($_SESSION['flash']) ?>
+			</div>
+			<?php unset($_SESSION['flash']); ?>
+		<?php endif; ?>
 		{{ content }}
 	</main>
 	<footer class="site-footer">

@@ -32,6 +32,33 @@ if (preg_match("#$route#", $url, $params)) {
     $routeMatched = true;
 }
 
+// страница login
+else {
+    $route = '^/login(\?.*)?$';
+    if (preg_match("#$route#", $url, $params)) {
+        $page = include 'view/page/login.php';
+        $routeMatched = true;
+    }
+}
+
+// страница logout
+if (!$routeMatched) {
+    $route = '^/logout$';
+    if (preg_match("#$route#", $url, $params)) {
+        $page = include 'view/page/logout.php';
+        $routeMatched = true;
+    }
+}
+
+// страница добавить тему (топик)
+if (!$routeMatched) {
+    $route = '^/addtopic(\?.*)?$';
+    if (preg_match("#$route#", $url, $params)) {
+        $page = include 'view/page/addtopic.php';
+        $routeMatched = true;
+    }
+}
+
 
 // категория форума (список топиков)
 if (!$routeMatched) {

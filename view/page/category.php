@@ -30,8 +30,18 @@
     $offset = ($sheet - 1) * $limit; 
 	
     
-    $query = "SELECT topics.id, topics.slug, topics.name, topics.date, categories.name as categoryname, categories.id as categoryid, categories.description as categorydescription 
+    $query = "SELECT 
+        topics.id, 
+        topics.slug, 
+        topics.name, 
+        topics.date, 
+        categories.name as categoryname, 
+        categories.id as categoryid, 
+        categories.description as categorydescription,
+        users.fullname as userfullname
     FROM topics 
+    LEFT JOIN
+		users ON users.id=topics.user_id
 	LEFT JOIN
 		categories ON categories.id=topics.category_id
 	WHERE
@@ -58,7 +68,7 @@
         $content .= '<p class="lead">' . $data[0]['categorydescription'] . '</p>';
 
         $content .= '<div class="acts" style="margin-bottom:16px">
-			<a class="btn" href="create.html">Create a topic</a>
+			<a class="btn" href="/addtopic">Create a topic</a>
 		</div>';
 
         $content .= '<table class="topics">
@@ -75,7 +85,7 @@
         foreach ($data as $page) {
             $content .= '<tr>
 					<td>' . '<a href="/' . $categorySlug . '/'  . $page['slug'] . '">' . $page['name'] . '</a>' . '<div class="meta">Opened Sep 10 · 176 views</div></td>
-					<td><a class="who-link" href="profile.html">Ira Bell</a></td>
+					<td><a class="who-link" href="profile.html">' . $page['userfullname'] . '</a></td>
 					<td>6</td>
 					<td>Carl Ide · Sep 11, 06:55</td>
 				</tr>';
@@ -134,7 +144,7 @@
     }    
     
 	$page = [
-		'title' => 'Все темы категории ' . $page['categoryname'], 
+		'title' => $page['categoryname'] . ' — Rack', 
 		'content' => $content
 	];    
     

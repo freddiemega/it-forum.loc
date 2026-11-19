@@ -62,7 +62,7 @@ h1 { margin: 0 0 8px; }
 .post header a { color: #0f3d3e; font-weight: 700; text-decoration: none; }
 label { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; font-size: 0.85rem; }
 input, textarea, select { padding: 8px; border: 1px solid #c5d4d6; width: 100%; min-width: 0; background: #fff; }
-.acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;}
 .btn, .ghost, .warn, .x { padding: 8px 12px; border: 0; text-decoration: none; display: inline-block; }
 .btn { background: #0f3d3e; color: #fff; }
 .ghost { background: #fff; color: #0f3d3e; border: 1px solid #0f3d3e; }
@@ -87,4 +87,26 @@ th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #c5d4d6; 
 .foot-in a { color: #9ad4c8; }
 @media (max-width: 720px) {
 	.cat, .stats { grid-template-columns: 1fr; }
+}
+.flash-message {
+    /* Обязательные свойства, чтобы зафиксировать блок на экране */
+    position: fixed;
+    top: 70px;          /* Отступ 20px от верхнего края экрана */
+    left: 50%;          /* Центрируем по горизонтали */
+    transform: translateX(-50%); /* Точное выравнивание по центру */
+    z-index: 9999;      /* Показываем поверх абсолютно всех элементов на сайте */
+    width: auto;
+
+    text-align: center;
+    color: red;
+    background-color: #FFF8DC;
+    padding: 10px;    
+    /* Добавляем плавность для прозрачности (opacity) на 0.5 секунды */
+    transition: opacity 0.5s ease;     
+}
+
+@media (max-width: 768px) {
+   .flash-message {
+        width: 100%;
+   } 
 }
